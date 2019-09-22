@@ -1,0 +1,51 @@
+// Copyright (C) 2019 Vlad-Stefan Dieaconu 321 CA
+
+Feedback tema: foarte interesanta, pot spune ca e una din temele alea care m-a
+facut sa gandesc cu pixul pe foaie, nu sa caut pe stackoverflow!
+Timp petrecut pe tema: 8-0 ore de lucrat efectiv
+Dificultati intampinate: seg fault-uri pentru modul de lucru fisierele
+
+Detalii implementare:
+===== TASK 1 =====
+Tot ce fac la acest task este sa citesc elementele si sa le adaug intr-un vector
+de perechi, in care first reprezinta nodul, iar second reprezinta distanta fata
+de root la care se afla acest nod. Apoi ordonez vectorul dupa valoarea lui
+second folosind un predicat. Ce o sa-mi rezulte sunt grupuri de nod-uri ce au
+aceeasi adancime in graf fata de nodul sursa. Ce vreau eu sa fac in continuare
+e sa iau efectiv grupurile astea si sa le memorez intr-o structura noua, folosesc
+de data asta un map pentru a mapa adancimea in graf la un vector cu nod-uri care
+corespund acelei adancimi. In continuare, pentru a forma graful meu, iterez prin
+vectorii acestia, incepand cu vectorul cu indicele 1 (nu cel cu indicele 0), pt
+ca urmeaza sa iau cate un element din vectorul curent si cate un element din cel
+precedent si sa le leg ca fiind cele 2 capete ale unei muchii.
+
+Ca verificari, pentru a ma asigura ca se poate construi graful, tot ce fac este
+sa verific ca adancimile sunt consecutive. In vectorul meu, cand parcurg, daca
+adancimea urmatoare celei curente nu este nici aceeasi adancime, nici incremetul
+cu 1 al ei, inseamna ca nu se poate construi graful. Alta conditie pe care o pun
+este ca numarul de root-uri sa fie egal cu 1. Se garanteaza ca primul nod este 0
+adica root, insa pe parcurs se poate intampla sa mai citim un nod care sa fie la
+o adancime egala tot cu 0, simbolizand ca si el ar fi tot root, lucru imposibil,
+deci input-ul e considerat gresit si returnez -1.
+
+===== TASK 2 =====
+Salvez elementele intr-o matrice. Dupa care pornesc cate un DFS din fiecare
+element al matricei, cu mentiunea ca de fiecare data o sa consider ca incep cu
+aria 1 (pt ca o sa am in zona mea un element cel putin, cel de unde pornesc DSF).
+Inauntrul DSF-ului, folosesc logica din laborator 7, de la problema bonus, si ma
+plimb folosind coordonatele N, S, V, E. Pentru asta imi iau 2 vectori, de cate 4
+elemente fiecare. Fac un for prin toate miscarile si verific daca sunt valide,
+adica daca nu cumva ies din matrice si daca nu cumva am mai fost acolo odata in
+cadrul parcurgerii respective. In cazul in care miscarea este valida, trebuie sa
+verific ca respecta si constrangerile din enuntul temei, adica ca diferenta
+dintre minimul si maximul din acea zona este cel mult K. Fac respectivele
+verificari, iar doar in cazul in care miscarea este valida, updatez valoarea
+minimului si maximului. O problema intampinata de mine era ca updatam valoarea
+lui min si max cand faceam verificarea si mergeam mai departe cu ele chiar daca
+miscarea se dovedea a fi invalida si nu o contorizam la aria totala. (folosesc
+deci valori auxiliare pt min si max). Daca miscarea e valida, incrementez aria
+si pornesc alt DSF din pozitia respectiva. La final, iau aria maxima dintre
+toate ariile intorase de DSF si o afisez.
+
+Pentru coding style am folosit standardul google, care presupune identarea
+folosind cate 2 spatii in loc de 4.

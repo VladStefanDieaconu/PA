@@ -1,0 +1,80 @@
+// Vlad-Stefan Dieaconu 321 CA
+
+HOMEWORK PA 2019
+
+As a general feedback, I found this homework pretty interesting. I was able to
+resolve the whole homework over one night of work, so I aproximate the total
+work time to be around 8~10 hours, including the time wasted poorly: I started
+this homework in Java, after I've done the first exercise and couldn't run
+the checker no matter what, I switched to C++ and everything was oke. C++ for
+the win, amen to that!
+
+I tried to add to this README just the info that is not already explained in
+my comments from the code, I hope it's not redundant information.
+
+First Problem
+Easy problem, all I've done was to sort the numbers. Then, each player takes
+one number, to keep track of whos turn it is, I have a variable in which I
+store the parity of the move.
+
+Second Problem
+To solve this problem, I am using dynamic programming. Each player uses the most
+optimal strategy. For the first player, I compute the maximum score between
+the two possible cases: the case when we substract i elements from the first j
+numbers and at the end we choose the element from the last position (j-1), and
+the case when we substract i-1 elements from the first j-1.
+The player two uses the same strategy, the only difference in the ecuation is
+that I have - instead of +, because if first player already took the element
+from the position j - 1, the second player will not be able to choose the same
+element, so he's subtracting it from his score. The way I am solving the problem
+it's not the best possible and I know it, because I have one column that is
+always 0 (first column). I tried to not to have memory used poorly, but I run
+into some problems trying to resolve it, and because of the lack of time, I left
+it like that. Because this homework didnt have any memory restrictions, I hope
+I will not be downgraded. Now, about how I compute the matrix for dynamic
+programming: on the first line(i = 0 always and j may go up to N) we have, at
+the j position, the maximum score the first player would have if he would play
+the game with an array formed with just j elements from the input array (first
+we sort the input array, then we take the greatest j numbers from it and play
+just with these numbers the game).
+Now, if i != 0, then it means that on that position of the matrix is the maximum
+score the player may obtain if he would play the game just with j elements and
+from those j elements, he would have to take out i of them. In the end, the
+answer we are looking for is the right-down corner (when i = K, j = N), because
+we want the best score when he plays the game using all N numbers and he has to
+take out a total of K numbers. 
+
+Third Problem
+I was once asked this question in an interviuw (http://bit.ly/2uPwPp5) and I was
+not able to respond, at that time I was not studying Dynamic Programming. For
+this problem, I am using dynamic programming also. The whole idea is that I am
+computing the best possible score for the first player. After that, I am using
+a variable to store the sum of all the numbers from my list. The best score for
+the second player is going to be the difference between the sum of all numbers
+and the numbers that were choose by the first player (and this is the best score
+for the first player, that I previously calculated). 
+I compute the best score for the first player in the same kind as I did for
+the second problem, meaning that: I have two cases, the case when I choose the
+element from the beginning of my array, and the case when I choose the element
+from the start of the array. If I choose the first element, at my next turn I
+will choose the minimum element, because second player is also playing smart
+and he already took the max element. At the end, I choose the case where I have
+the bigger score. After doing the second problem, it was very easy to understand 
+this one.
+Also, I used classes so that I dont have to send the matrix as a parameter.
+For me OOP is the simplest way to implement a problem, so I used it here.
+
+Forth Problem
+Even if I was not able to finish this problem and submit it, I observed that
+all permutations of a solution are also solutions, so the problem reduces to 
+the problem of finding the number of unique arranged solutions that satisfy the 
+requirments of the first problem. I was not able to solve it in time.
+
+For coding style I used Vera++ on Linux, a tool that helps you identify possible
+coding style errors, based on a standard that you choose.
+
+Feedback: very interesting and I am confident that it helped me understand the
+concept behind dynamic programming.
+Time required: between 12-14 consecutive hours.
+Problems I've run into: seg faults because of the way I was dealing with the
+indexes of the matrixes I used for dynamic programming.
